@@ -28,11 +28,14 @@ import com.example.demoo.data.repo.UserRepository
 import com.example.demoo.ui.theme.DemooTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 
@@ -62,21 +65,35 @@ fun SearchScreen(viewModel: UserViewModel) {
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
+    ) { Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        // Search bar
         BasicTextField(
-               value = query,
+            value = query,
             onValueChange = { query = it },
             modifier = Modifier
-                .fillMaxWidth()
+                .weight(1f) // Make the text field take available space
                 .padding(8.dp)
-                .background(MaterialTheme.colorScheme.surface, MaterialTheme.shapes.small)
+                .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(8.dp))
                 .border(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), RoundedCornerShape(8.dp))
-                .padding(16.dp)
+                .padding(16.dp),
+            textStyle = MaterialTheme.typography.bodyLarge.copy(
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = { viewModel.searchUsers(query) }) {
+        // Search button
+        Button(
+            onClick = { viewModel.searchUsers(query) },
+            modifier = Modifier
+                .align(Alignment.CenterVertically) // Align button vertically center within the row
+                .padding(8.dp)
+        ) {
             Icon(
                 imageVector = Icons.Filled.Search,
                 contentDescription = "Search",
@@ -84,6 +101,35 @@ fun SearchScreen(viewModel: UserViewModel) {
             )
             Text("Search")
         }
+    }
+      /*  BasicTextField(
+               value = query,
+            onValueChange = { query = it },
+            modifier = Modifier
+                .weight(1f)
+               // .fillMaxWidth()
+                .padding(8.dp)
+                .background(MaterialTheme.colorScheme.surface, MaterialTheme.shapes.small)
+                .border(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), RoundedCornerShape(8.dp))
+                .padding(16.dp),
+                    textStyle = MaterialTheme.typography.bodyLarge.copy(
+                    fontSize = 18.sp,
+            fontWeight = FontWeight.Bold
+        ))
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(onClick = { viewModel.searchUsers(query) },
+            modifier = Modifier
+                .align(Alignment.CenterVertically) // Align button vertically center
+                .padding(8.dp)) {
+            Icon(
+                imageVector = Icons.Filled.Search,
+                contentDescription = "Search",
+                modifier = Modifier.padding(end = 8.dp)
+            )
+            Text("Search")
+        }*/
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -108,6 +154,10 @@ fun UserItem(user: Item) {
             painter = rememberAsyncImagePainter(model =user.avatar_url ),
             contentDescription = "User Avatar",
             modifier = Modifier.size(40.dp)
+                .size(40.dp)
+                .clip(CircleShape) // Clip image to be circular
+                .border(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), CircleShape) // Optional border
+
         )
         Spacer(modifier = Modifier.width(8.dp))
         Column {
