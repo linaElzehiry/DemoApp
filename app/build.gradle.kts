@@ -77,7 +77,9 @@ dependencies {
     implementation ("io.insert-koin:koin-androidx-compose:3.2.0")
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation ("androidx.activity:activity-compose:1.3.1")
-    implementation ("io.coil-kt:coil-compose:1.4.0")
+   // implementation ("io.coil-kt:coil-compose:1.4.0")
+    implementation ("io.coil-kt:coil-compose:2.0.0")
+
     implementation( "androidx.compose.ui:ui:1.4.0")
     implementation ("androidx.compose.material:material:1.4.0")
     implementation ("androidx.compose.ui:ui-tooling-preview:1.4.0")

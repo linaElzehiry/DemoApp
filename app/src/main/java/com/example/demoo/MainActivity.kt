@@ -26,6 +26,11 @@ import com.example.demoo.data.model.Item
 import com.example.demoo.data.remote.RetrofitHelper
 import com.example.demoo.data.repo.UserRepository
 import com.example.demoo.ui.theme.DemooTheme
+import androidx.compose.foundation.Image
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import coil.compose.rememberAsyncImagePainter
+import coil.compose.rememberImagePainter
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,8 +95,8 @@ fun SearchScreen(viewModel: UserViewModel) {
 fun UserItem(user: Item) {
     Row(modifier = Modifier.padding(8.dp)) {
         Image(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground), // Replace with actual image loading logic
-            contentDescription = null,
+            painter = rememberAsyncImagePainter(model =user.avatar_url ),
+            contentDescription = "User Avatar",
             modifier = Modifier.size(40.dp)
         )
         Spacer(modifier = Modifier.width(8.dp))
