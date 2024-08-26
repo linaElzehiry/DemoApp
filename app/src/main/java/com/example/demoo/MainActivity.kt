@@ -27,6 +27,10 @@ import com.example.demoo.data.remote.RetrofitHelper
 import com.example.demoo.data.repo.UserRepository
 import com.example.demoo.ui.theme.DemooTheme
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import coil.compose.rememberAsyncImagePainter
@@ -60,18 +64,24 @@ fun SearchScreen(viewModel: UserViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         BasicTextField(
-            value = query,
+               value = query,
             onValueChange = { query = it },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(MaterialTheme.colorScheme.surface, MaterialTheme.shapes.small)
+                .border(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f), RoundedCornerShape(8.dp))
                 .padding(16.dp)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = { viewModel.searchUsers(query) }) {
+            Icon(
+                imageVector = Icons.Filled.Search,
+                contentDescription = "Search",
+                modifier = Modifier.padding(end = 8.dp)
+            )
             Text("Search")
         }
 
